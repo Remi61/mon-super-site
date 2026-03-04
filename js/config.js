@@ -66,13 +66,6 @@ const config = {
             tags: ["Annuaire", "LDAP", "Linux"] 
         },
         { 
-            icon: "🔌",
-            title: "Script Anti-Coupure NetTerm", 
-            description: "Création et déploiement d'un script de démarrage sous Windows 11 pour empêcher les coupures.", 
-            path: "netterm_script.pdf", 
-            tags: ["Windows", "Scripting", "Optimisation"] 
-        },
-        { 
             icon: "🦑",
             title: "Procédure Proxy Squid", 
             description: "Installation et configuration d'un serveur Proxy Squid pour la gestion et le filtrage du trafic.", 
@@ -237,6 +230,7 @@ const config = {
     ]
 
 };
+
 
 
 
