@@ -31,7 +31,7 @@ const config = {
     procedures: [
         // --- BATCH 1 ---
        { 
-            icon: "📂",
+            icon: "🪶",
             title: "Apache et DNS", 
             description: "installation d'un serveur Apache et DNS.", 
             path: "apachedns.pdf", 
@@ -230,6 +230,7 @@ const config = {
     ]
 
 };
+
 
 
 
