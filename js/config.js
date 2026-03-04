@@ -30,11 +30,11 @@ const config = {
 
     procedures: [
         // --- BATCH 1 ---
-        { 
+       { 
             icon: "📂",
             title: "Procédure Samba", 
             description: "Pré-requis : un poste client Windows 10 et un serveur Debian 12.5. Configuration du partage de fichiers.", 
-            path: "documents/procedure_samba.pdf", 
+            path: "documents/procedure_samba.pdf", // <-- LA MODIFICATION EST ICI
             tags: ["Linux", "Partage", "Samba"] 
         },
         { 
@@ -237,6 +237,7 @@ const config = {
     ]
 
 };
+
 
 
 
