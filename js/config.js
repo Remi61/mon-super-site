@@ -174,6 +174,13 @@ const config = {
             path: "config_dhcp.pdf", 
             tags: ["Linux", "DHCP", "Réseau"] 
         }
+        { 
+            icon: "🏷️",
+            title: "Apache et DNS", 
+            description: "Mise en place d'un srveur Apache et DNS.", 
+            path: "apachedns.pdf", 
+            tags: ["LAMP", "Apache", "DNS"] 
+        }
     ],
 
     experiences: [
@@ -223,6 +230,7 @@ const config = {
     ]
 
 };
+
 
 
 
