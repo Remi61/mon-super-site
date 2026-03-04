@@ -34,7 +34,7 @@ const config = {
             icon: "📂",
             title: "Procédure Samba", 
             description: "Pré-requis : un poste client Windows 10 et un serveur Debian 12.5. Configuration du partage de fichiers.", 
-            path: "procedure_samba.pdf", 
+            path: "\documents\procedure_samba.pdf", 
             tags: ["Linux", "Partage", "Samba"] 
         },
         { 
@@ -235,4 +235,5 @@ const config = {
         { name: "BAFA", issuer: "Jeunesse & Sports" },
         { name: "Permis B", issuer: "Préfecture" }
     ]
+
 };
