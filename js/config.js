@@ -32,6 +32,13 @@ const config = {
         // --- BATCH 1 ---
        { 
             icon: "📂",
+            title: "Apache et DNS", 
+            description: "installation d'un serveur Apache et DNS.", 
+            path: "apachedns.pdf", 
+            tags: ["LAMP", "DNS", "Apache"] 
+        },
+        { 
+            icon: "📂",
             title: "Procédure Samba", 
             description: "Pré-requis : un poste client Windows 10 et un serveur Debian 12.5. Configuration du partage de fichiers.", 
             path: "procedure_samba.pdf", 
@@ -223,6 +230,7 @@ const config = {
     ]
 
 };
+
 
 
 
