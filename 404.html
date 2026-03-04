@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page non trouvée | 404</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Variables de style (identiques à votre site) --- */
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --primary-color: #6366f1; /* Indigo accent */
+            --primary-hover: #4f46e5;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        /* --- Configuration de base --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            /* Petit fond subtil */
+            background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent 40%);
+        }
+
+        /* --- La carte centrale --- */
+        .error-card {
+            background-color: var(--bg-card);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            /* Effet d'ombre portée et bordure subtile comme sur le site */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            /* Animation d'apparition */
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        /* --- Le gros chiffre 404 --- */
+        .error-code-container {
+            /* Petite animation de flottement */
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 0;
+            line-height: 1;
+            /* Effet de lueur */
+            text-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+        }
+
+        /* --- Textes --- */
+        h1 {
+            font-size: 1.8rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* --- Le bouton de retour --- */
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 28px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.4);
+        }
+
+        .home-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.5);
+        }
+
+        .home-btn i {
+            margin-right: 10px;
+        }
+
+        /* --- Animations --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="error-card">
+        <div class="error-code-container">
+            <div class="error-code">404</div>
+        </div>
+        <i class="fas fa-ghost" style="font-size: 3rem; color: var(--primary-color); margin-top: -20px; margin-bottom: 20px; opacity: 0.6;"></i>
+        
+        <h1>Oups ! Fichier introuvable.</h1>
+        <p>
+            Il semblerait que la procédure ou la page que vous cherchez ne soit pas encore disponible, ou qu'elle ait été déplacée.
+        </p>
+        
+        <a href="index.html" class="home-btn">
+            <i class="fas fa-arrow-left"></i>
+            Retour à l'accueil
+        </a>
+    </div>
+
+</body>
+</html>

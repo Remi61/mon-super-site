@@ -1,0 +1,806 @@
+:root {
+    --bg-deep: #080a10;
+    --bg-panel: rgba(20, 25, 40, 0.7);
+    --border-light: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.25);
+    
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    
+    --accent: #6366f1; 
+    --accent-glow: rgba(99, 102, 241, 0.4);
+    --gold: #fbbf24;
+    --green-signal: #10b981;
+
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Manrope', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    --radius: 12px;
+    --sidebar-width: 280px;
+}
+
+body.light-mode {
+    --bg-deep: #f0f2f5;
+    --bg-panel: rgba(255, 255, 255, 0.85);
+    --border-light: rgba(0, 0, 0, 0.08);
+    --border-hover: rgba(0, 0, 0, 0.15);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --accent: #4f46e5;
+    --accent-glow: rgba(79, 70, 229, 0.15);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background-color: var(--bg-deep); color: var(--text-primary); font-family: var(--font-body); overflow-x: hidden; min-height: 100vh; }
+
+/* CANVAS & LOADER */
+#bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.6; }
+
+/* Conteneur principal qui couvre tout l'écran */
+#loader-wrapper { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: var(--bg-deep); /* Fond sombre du site */
+    z-index: 9999; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    transition: opacity 0.8s ease, visibility 0.8s; 
+}
+
+/* Le texte "REMI." */
+.loader-text { 
+    font-family: var(--font-heading); /* Space Grotesk pour le côté chic/moderne */
+    font-size: 3.5rem; /* Grand et imposant */
+    font-weight: 800; /* Très gras */
+    letter-spacing: 4px; /* Espacement des lettres comme sur la capture */
+    color: var(--text-secondary); /* Gris élégant */
+    text-transform: uppercase;
+    opacity: 0; /* Commence invisible pour l'animation */
+    animation: textFadeIn 2s ease-in-out infinite alternate;
+}
+
+/* Le point "." en couleur */
+.loader-dot {
+    color: var(--accent); /* Ton violet */
+}
+
+/* Animation de respiration douce */
+@keyframes textFadeIn { 
+    0% { opacity: 0.3; transform: scale(0.98); } 
+    100% { opacity: 1; transform: scale(1); } 
+}
+
+/* On supprime les anciens styles qui ne servent plus */
+.loader-circle { display: none; }
+.pulse-anim { animation: pulseBtn 3s infinite; }
+@keyframes pulseBtn { 0% { box-shadow: 0 0 0 0 var(--accent-glow); } 70% { box-shadow: 0 0 0 10px rgba(0,0,0,0); } 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); } }
+
+/* SIDEBAR */
+#app-sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar-width); height: 100vh; display: flex; flex-direction: column; padding: 40px 20px; z-index: 1000; border-right: 1px solid var(--border-light); backdrop-filter: blur(30px); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; }
+.sidebar-header { text-align: center; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; }
+.avatar-container img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--border-light); margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.identity-info { align-items: center; }
+.id-name { font-family: var(--font-heading); font-weight: 700; font-size: 1.4rem; text-align: center; line-height: 1.2; margin-bottom: 5px; }
+.status-badge { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--green-signal); font-family: var(--font-mono); justify-content: center; }
+.status-light { width: 8px; height: 8px; background: var(--green-signal); border-radius: 50%; box-shadow: 0 0 5px var(--green-signal); animation: blinkStatus 1.5s infinite; }
+@keyframes blinkStatus { 0% { opacity: 0.4; } 50% { opacity: 1; box-shadow: 0 0 10px var(--green-signal); } 100% { opacity: 0.4; } }
+.sidebar-social { display: flex; gap: 10px; margin-top: 15px; justify-content: center; }
+.social-mini-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: 0.3s; background: rgba(255,255,255,0.02); }
+.social-mini-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+/* --- SIDEBAR NAV UPDATE (MOINS PLAT) --- */
+.sidebar-nav { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+.sidebar-nav ul { 
+    list-style: none; 
+    padding: 0; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; /* Plus d'espace */
+}
+
+/* Séparateur subtil */
+.sidebar-nav li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    padding-bottom: 12px;
+}
+.sidebar-nav li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.sidebar-nav a { 
+    display: flex; 
+    align-items: center; 
+    padding: 12px 20px; 
+    border-radius: 12px; /* Plus arrondi */
+    color: var(--text-secondary); 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: 0.95rem; 
+    transition: all 0.3s ease; 
+    border-left: 3px solid transparent;
+    background: rgba(255, 255, 255, 0.015); /* Fond très léger pour le volume */
+}
+.sidebar-nav a:hover, .sidebar-nav a.active-link { 
+    background: rgba(99, 102, 241, 0.15); /* Plus de dégradé, juste une couleur unie transparente */
+    color: var(--text-primary); 
+    border-left-color: var(--accent); 
+    padding-left: 25px; 
+    box-shadow: 5px 0 15px rgba(0,0,0,0.1); 
+}
+
+.nav-icon { margin-right: 12px; font-size: 1.1rem; width: 24px; text-align: center; }
+.sidebar-footer { border-top: 1px solid var(--border-light); padding-top: 20px; margin-top: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+.copyright { font-size: 0.7rem; color: var(--text-secondary); opacity: 0.7; }
+
+/* MAIN CONTENT */
+.main-content { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); padding: 40px 0; min-height: 100vh; }
+#mobile-toggle-btn { position: fixed; top: 20px; left: 20px; z-index: 2000; display: none; width: 45px; height: 45px; font-size: 1.5rem; border-radius: 8px; align-items: center; justify-content: center; }
+
+@media (max-width: 950px) {
+    #app-sidebar { transform: translateX(-100%); width: 280px; box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
+    #app-sidebar.active { transform: translateX(0); }
+    .main-content { margin-left: 0; width: 100%; padding: 20px 0; }
+    #mobile-toggle-btn { display: flex; }
+    .mobile-footer { display: block !important; padding: 20px; border-top: 1px solid var(--border-light); text-align: center; margin-top: 40px;}
+}
+@media (min-width: 951px) { .mobile-footer { display: none !important; } }
+
+/* HERO */
+.container { max-width: 1000px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 1; }
+.hero-section { min-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.hero-tag { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 2px; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; background: rgba(99, 102, 241, 0.1); display: inline-block; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--accent-glow); }
+.hero-title { font-family: var(--font-heading); font-size: 3.5rem; line-height: 1.1; background: linear-gradient(135deg, #fff 30%, #94a3b8 100%); -webkit-background-clip: text; color: transparent; margin-bottom: 25px; }
+body.light-mode .hero-title { background: linear-gradient(135deg, #0f172a 30%, #64748b 100%); -webkit-background-clip: text; }
+.bio-text { font-size: 1.15rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 40px; line-height: 1.6; }
+.cta-group { display: flex; gap: 15px; justify-content: center; margin-bottom: 50px; }
+.primary-btn { background: var(--text-primary); color: var(--bg-deep); border: none; padding: 14px 32px; border-radius: 100px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+.primary-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--accent-glow); }
+.secondary-btn { background: transparent; border: 1px solid var(--border-hover); color: var(--text-primary); padding: 14px 32px; border-radius: 100px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+.secondary-btn:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.02); }
+
+/* --- A PROPOS SECTION --- */
+.about-container { display: flex; gap: 60px; align-items: center; margin-top: 20px; }
+.about-image-wrapper { flex: 0 0 250px; display: flex; justify-content: center; }
+.about-profile-img { width: 250px; height: 250px; border-radius: 50%; object-fit: cover; border: 5px solid rgba(255, 255, 255, 0.05); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); }
+.about-text-content { flex: 1; }
+.about-subtitle { color: var(--accent); font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 20px; font-weight: 700; }
+.about-intro { font-size: 1.1rem; margin-bottom: 15px; font-weight: 500; font-style: italic; color: var(--text-primary); }
+.about-body p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 15px; font-size: 1rem; }
+.about-body strong { color: var(--text-primary); font-weight: 600; }
+.about-action { margin-top: 30px; display: flex; justify-content: flex-end; }
+.cv-button-styled { 
+    display: inline-block; padding: 10px 40px; border: 1px solid var(--accent); 
+    color: var(--accent); font-weight: 700; text-decoration: none; 
+    border-radius: 4px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
+}
+.cv-button-styled:hover { background: var(--accent); color: #fff; box-shadow: 0 5px 20px var(--accent-glow); }
+
+@media (max-width: 900px) {
+    .about-container { flex-direction: column; text-align: center; gap: 30px; }
+    .about-action { justify-content: center; }
+}
+
+/* SECTIONS */
+.section-wrapper { padding: 80px 0; border-top: 1px solid var(--border-light); }
+.section-header { display: flex; align-items: baseline; gap: 15px; margin-bottom: 40px; }
+.section-number { font-family: var(--font-mono); color: var(--accent); font-size: 1rem; opacity: 0.8; }
+.section-title { font-family: var(--font-heading); font-size: 2.2rem; }
+.section-subtitle { margin-top: -30px; margin-bottom: 40px; color: var(--text-secondary); font-size: 0.95rem; }
+
+/* GRIDS & CARDS */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; align-items: flex-start; }
+.project-card, .procedure-card-wrapper { background: var(--bg-panel); border: 1px solid var(--border-light); border-radius: var(--radius); padding: 30px; transition: 0.4s; position: relative; display: flex; flex-direction: column; backdrop-filter: blur(10px); }
+.project-card:hover, .procedure-card-wrapper:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.3); }
+.project-card.expanded, .procedure-card-wrapper.expanded { grid-column: 1 / -1; }
+.card-header { cursor: pointer; flex-grow: 1; }
+.meta h4 { font-family: var(--font-heading); font-size: 1.4rem; margin: 10px 0; }
+.meta p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 15px; }
+.tags-container { display: flex; flex-wrap: wrap; gap: 8px; }
+.project-tag { font-size: 0.75rem; font-family: var(--font-mono); padding: 4px 10px; border: 1px solid var(--border-light); border-radius: 4px; color: var(--text-secondary); }
+.info-btn { position: absolute; top: 30px; right: 30px; background: none; border: 1px solid var(--border-light); width: 32px; height: 32px; border-radius: 50%; color: var(--text-secondary); cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; }
+.info-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* PARCOURS */
+.timeline-list { padding-left: 20px; border-left: 1px solid var(--border-light); list-style: none; }
+.timeline-item { margin-bottom: 40px; position: relative; }
+.timeline-item::before { content: ''; position: absolute; left: -24px; top: 6px; width: 7px; height: 7px; background: var(--bg-deep); border: 1px solid var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); }
+.timeline-date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); display: block; margin-bottom: 5px; }
+.timeline-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+.timeline-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* ANCIEN STYLE COMPETENCES (GARDÉ POUR COMPATIBILITÉ CERTIFS) */
+.grid-sm { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; list-style: none; align-items: flex-start; }
+.comp-card-container, .cert-card-container { background: var(--bg-panel); border: 1px solid var(--border-light); border-radius: 8px; padding: 20px; transition: 0.3s; }
+.comp-card-container:hover { border-color: var(--text-secondary); transform: translateY(-3px); }
+.comp-header { display: flex; align-items: center; gap: 15px; font-weight: 600; cursor: pointer; user-select: none; }
+.comp-arrow { margin-left: auto; font-size: 0.8rem; transition: transform 0.4s ease; color: var(--text-secondary); }
+.comp-card-container.active .comp-arrow { transform: rotate(180deg); color: var(--accent); }
+.comp-dropdown-menu { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s ease, opacity 0.3s ease; margin-top: 0; list-style: none; border-top: 1px solid transparent; }
+.comp-card-container.active .comp-dropdown-menu { max-height: 400px; opacity: 1; margin-top: 15px; padding-top: 10px; border-color: var(--border-light); }
+.comp-dropdown-menu li { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; }
+
+/* MODALS */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 2000; display: none; justify-content: center; align-items: center; padding: 20px; }
+.modal-content { background: #0f111a; width: 100%; max-width: 500px; border-radius: var(--radius); border: 1px solid var(--border-light); overflow: hidden; position: relative; }
+.modal-header { padding: 20px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+.modal-body { padding: 30px; }
+.close-btn, .close-btn-abs { background: none; border: none; font-size: 1.5rem; color: var(--text-secondary); cursor: pointer; }
+.close-btn-abs { position: absolute; top: 20px; right: 20px; z-index: 10; color: #fff; /* Croix blanche pour visibilité */ }
+.contact-modal-size { max-width: 800px; height: 500px; display: flex; }
+.contact-layout { display: flex; width: 100%; height: 100%; }
+.contact-info-side { width: 35%; background: rgba(99, 102, 241, 0.05); padding: 40px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--border-light); }
+.contact-form { width: 65%; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+.form-group { position: relative; margin-bottom: 25px; }
+.form-group input, .form-group textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border-light); padding: 10px 0; color: var(--text-primary); font-family: var(--font-body); font-size: 1rem; outline: none; transition: 0.3s; }
+.form-group label { position: absolute; top: 10px; left: 0; color: var(--text-secondary); pointer-events: none; transition: 0.3s; font-size: 0.95rem; }
+.form-group input:focus + label, .form-group input:not(:placeholder-shown) + label, .form-group textarea:focus + label, .form-group textarea:not(:placeholder-shown) + label { top: -12px; font-size: 0.75rem; color: var(--accent); }
+.submit-btn { background: var(--text-primary); color: var(--bg-deep); border: none; padding: 12px 24px; font-weight: 700; cursor: pointer; border-radius: 4px; position: relative; overflow: hidden; align-self: flex-start; }
+.glass-btn { background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); color: var(--text-primary); cursor: pointer; transition: 0.3s; }
+.glass-panel { background: var(--bg-panel); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border-light); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); }
+.icon-btn { width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; }
+
+.fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; transform: translateY(30px); }
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+.pdf-container { display: none; height: 500px; margin-top: 20px; border: 1px solid var(--border-light); }
+
+/* --- NOUVEAUX STYLES COMPETENCES SISR (THEME SOMBRE) --- */
+
+/* Titre Orange Souligné */
+.sisr-title {
+    color: #e44d26 !important; 
+    border-bottom: 4px solid #e44d26;
+    display: inline-block;
+    padding-bottom: 8px;
+    margin-bottom: 25px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+/* Grille des cartes */
+.sisr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* La Carte (ADAPTÉE AU THEME SOMBRE) */
+.sisr-card {
+    background: var(--bg-panel); /* Utilise la couleur du site */
+    border: 1px solid var(--border-light); /* Ajout bordure */
+    backdrop-filter: blur(10px); /* Ajout effet verre */
+    border-radius: 12px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 170px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+    cursor: default;
+    /* AJOUT POUR LES CERTIFS : position relative pour les éléments absolus (icône i) */
+    position: relative;
+    /* CORRECTION : suppression de overflow hidden pour que l'infobulle puisse sortir */
+    overflow: visible;
+}
+
+.sisr-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border-color: var(--accent); /* Petit effet au survol */
+}
+
+/* Icone au centre */
+.sisr-icon {
+    font-size: 3.5rem;
+    margin-top: 10px;
+}
+
+/* Label en bas avec ligne de séparation subtile */
+.sisr-label {
+    border-top: 1px solid var(--border-light); /* Ligne plus discrète */
+    width: 100%;
+    text-align: center;
+    padding-top: 12px;
+    font-family: var(--font-body);
+    font-weight: 800;
+    color: var(--text-primary); /* Texte clair */
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    /* CORRECTION CENTRAGE */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- NOUVEAU DESIGN CONTACT (THEME DU SITE - NO RED) --- */
+
+/* Conteneur Global */
+.contact-new-header {
+    text-align: left;
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+.contact-new-title {
+    font-size: 1.8rem;
+    font-family: var(--font-heading);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.contact-new-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: var(--accent); /* DEVIENT VIOLET */
+    margin-left: 15px;
+}
+.contact-new-subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+.highlight-text {
+    color: var(--accent); /* DEVIENT VIOLET */
+    font-weight: 700;
+    text-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Le Wrapper (Layout 2 colonnes) */
+.contact-new-wrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center; /* CENTRAGE DU FORMULAIRE */
+}
+
+/* Partie Gauche : Info Box */
+.contact-new-info {
+    flex: 1;
+    min-width: 300px;
+    background: var(--bg-panel); /* THEME SOMBRE */
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.info-item-new {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    background: rgba(99, 102, 241, 0.1); /* VIOLET TRANSPARENT */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--accent); /* ICONE VIOLET */
+    flex-shrink: 0;
+}
+
+.info-text h4 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+.info-text p {
+    color: #aeb0c2;
+    font-size: 0.95rem;
+}
+
+/* Partie Droite : Formulaire Box */
+.contact-new-form-container {
+    flex: 1.5;
+    min-width: 300px;
+    background: var(--bg-panel); /* THEME SOMBRE */
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+    /* AJOUT POUR INTEGRER LA CROIX */
+    position: relative;
+}
+
+.new-design-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+.form-row .form-group-new {
+    width: 50%;
+}
+
+.form-group-new {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group-new label {
+    color: var(--text-secondary); /* PLUS DE ROUGE, RETOUR AU GRIS */
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.form-group-new input, 
+.form-group-new textarea {
+    background: rgba(255, 255, 255, 0.03); /* FOND SOMBRE TRANSPARENT */
+    border: 1px solid var(--border-light);
+    border-radius: 5px;
+    padding: 12px;
+    font-family: var(--font-body);
+    color: var(--text-primary); /* PLUS DE ROUGE, RETOUR AU BLANC */
+    width: 100%;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group-new input:focus, 
+.form-group-new textarea:focus {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent); /* Focus en violet */
+    box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+/* Bouton ENVOYER */
+.form-submit-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.new-submit-btn {
+    background: var(--accent); /* VIOLET DU SITE */
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px; /* Carré arrondi */
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.2s;
+}
+.new-submit-btn:hover {
+    background: #4f46e5;
+    transform: translateY(-2px);
+}
+.new-submit-btn.full-width {
+    width: 100%;
+    border-radius: 50px;
+}
+
+/* Ajustements Spécifiques Modal */
+.new-modal-style {
+    background: transparent !important; 
+    border: none !important;
+    padding: 0 !important;
+    max-width: 900px !important;
+    box-shadow: none !important; /* SUPPRESSION DE L'OMBRE FANTOME */
+    backdrop-filter: none !important; /* SUPPRESSION DU FLOU FANTOME */
+}
+.contact-new-wrapper.full-height {
+    height: 100%;
+    align-items: stretch;
+}
+.modal-fix-info {
+    background: #1e1e2f; 
+}
+.modal-fix-form {
+    background: #1e1e2f;
+    display: flex; /* FLEX POUR CENTRER */
+    flex-direction: column;
+    justify-content: center; /* CENTRAGE VERTICAL */
+}
+.modal-mini-title {
+    color: var(--accent); /* VIOLET */
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .form-row { flex-direction: column; gap: 15px; }
+    .form-row .form-group-new { width: 100%; }
+    .contact-new-wrapper { flex-direction: column; }
+    .new-modal-style { overflow-y: auto; height: auto; max-height: 90vh; }
+}
+
+/* =========================================
+   DESIGN DES BARRES DE DÉFILEMENT (CHIC)
+   ========================================= */
+
+/* --- Pour Firefox --- */
+/* Firefox a des options limitées, on fait simple et propre */
+* {
+    scrollbar-width: thin; /* Barre fine */
+    scrollbar-color: var(--accent) rgba(8, 10, 16, 0.3); /* Couleur du curseur et du fond */
+}
+
+/* --- Pour Chrome, Edge, Safari (Webkit) --- */
+/* C'est ici qu'on fait le design "chic" avec dégradés */
+
+/* Largeur de la barre verticale et hauteur de la barre horizontale */
+::-webkit-scrollbar {
+    width: 10px; 
+    height: 10px;
+}
+
+/* Le fond de la barre (la piste) */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02); /* Très transparent */
+    backdrop-filter: blur(5px); /* Effet de flou "verre" derrière */
+    border-radius: 10px; /* Bords arrondis */
+    margin: 5px 0; /* Un peu d'espace en haut et en bas */
+}
+
+/* Le curseur (la partie qu'on bouge) */
+::-webkit-scrollbar-thumb {
+    /* Dégradé vertical chic utilisant ta couleur d'accentuation */
+    background: linear-gradient(180deg, var(--accent) 0%, #8b5cf6 100%);
+    border-radius: 10px; /* Curseur bien arrondi */
+    /* Une bordure de la même couleur que le fond crée un espace "élégant" autour du curseur */
+    border: 2px solid var(--bg-deep); 
+    background-clip: padding-box;
+    transition: background 0.3s ease;
+}
+
+/* Quand on passe la souris sur le curseur */
+::-webkit-scrollbar-thumb:hover {
+    /* Le dégradé devient légèrement plus clair/vif */
+    background: linear-gradient(180deg, #7c7eff 0%, #a78bfa 100%);
+    border: 2px solid var(--bg-deep);
+}
+
+/* Le coin où les barres horizontale et verticale se croisent */
+::-webkit-scrollbar-corner {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Application spécifique pour le menu de gauche (sidebar) pour qu'il soit aussi joli */
+#app-sidebar::-webkit-scrollbar-track {
+    margin: 20px 0; /* Un peu plus de marge dans le menu */
+    background: rgba(0, 0, 0, 0.1); /* Fond légèrement plus sombre pour le menu */
+}
+
+/* =========================================
+   BOUTON RETOUR EN HAUT
+   ========================================= */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--accent); /* VIOLET DU SITE */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 15px var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#back-to-top:hover {
+    background: #4f46e5;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+}
+
+#back-to-top svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* =========================================
+   EFFET BLOB ORGANIQUE - PHOTO MENU GAUCHE
+   ========================================= */
+
+/* 1. Préparation du conteneur de la photo de profil (sidebar) */
+.avatar-container {
+    /* Important pour que le blob se positionne par rapport à l'image */
+    position: relative;
+    /* Important pour gérer l'empilement */
+    z-index: 0; 
+    /* On s'assure que tout est centré */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* On enlève la marge bas par défaut pour éviter un décalage visuel */
+    margin-bottom: 15px; 
+}
+
+/* 2. Création de la bulle (blob) derrière l'image */
+.avatar-container::before {
+    content: '';
+    position: absolute;
+    /* On le place DERRIÈRE l'image */
+    z-index: -1; 
+    
+    /* TAILLE : Un peu plus grand que l'image (qui fait 100px) */
+    width: 140px; 
+    height: 140px;
+    
+    /* COULEUR : Votre violet d'accentuation */
+    background-color: var(--accent); 
+    opacity: 0.4; /* Un peu plus visible */
+    
+    /* FORME DE DÉPART */
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+    
+    /* L'ANIMATION */
+    animation: morphingBlobSmall 8s ease-in-out infinite alternate;
+    
+    /* Léger flou */
+    filter: blur(8px);
+}
+
+/* 3. Définition du mouvement (Version adaptée petite taille) */
+@keyframes morphingBlobSmall {
+    0% {
+        border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+        transform: rotate(0deg);
+    }
+    100% {
+        border-radius: 70% 30% 52% 48% / 33% 30% 70% 67%;
+        transform: rotate(20deg) scale(1.1);
+    }
+}
+
+/* =========================================
+   CERTIFICATIONS : INFOBULLE (TOOLTIP) & BADGE PDF
+   ========================================= */
+
+/* Le Wrapper de l'icône Info */
+.cert-info-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10; /* Au-dessus du lien */
+}
+
+/* L'icône 'i' elle-même */
+.cert-info-icon {
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-light);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: help;
+    transition: 0.3s;
+}
+
+.cert-info-icon:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+/* L'infobulle (Tooltip) caché par défaut */
+.cert-tooltip {
+    position: absolute;
+    bottom: 100%; /* Juste au-dessus de l'icône */
+    right: 0;
+    width: 220px;
+    padding: 10px 15px;
+    background: #1e1e2f; /* Fond sombre opaque */
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    text-align: left;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    z-index: 100; /* Z-INDEX AUGMENTÉ pour passer au-dessus des autres cartes */
+    pointer-events: none; /* Pour ne pas gêner le clic */
+}
+
+/* La petite flèche du tooltip */
+.cert-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 8px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: var(--accent) transparent transparent transparent;
+}
+
+/* Affichage au survol de l'icône */
+.cert-info-wrapper:hover .cert-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-8px);
+}
+
+/* Lien qui couvre toute la carte (Overlay) */
+.cert-link-overlay {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+/* BADGE "Voir le PDF" */
+.pdf-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background-color: var(--accent); /* Violet du thème */
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    opacity: 0; /* Invisible par défaut */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+    z-index: 5;
+    pointer-events: none; /* Le clic passe au lien en dessous */
+    white-space: nowrap;
+}
+
+/* Animation au survol de la carte */
+.sisr-card:hover .pdf-badge {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Petit effet de flou sur l'icône pour faire ressortir le texte */
+.sisr-card:hover .sisr-icon {
+    filter: blur(2px);
+    opacity: 0.5;
+    transition: 0.3s;
+}

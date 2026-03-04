@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rémi Christophe | SysAdmin & Réseau">
+    <meta property="og:description" content="Portfolio d'étudiant BTS SIO - Administrateur Système et Réseau.">
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.github.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self';">
+    
+    <title>REMI.</title>
+    
+    <link id="favicon-link" rel="icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="loader-wrapper">
+        <div class="loader-content">
+            <div class="loader-text">REMI<span class="loader-dot">.</span></div>
+        </div>
+    </div>
+
+    <canvas id="bg-canvas"></canvas>
+    <div class="noise-overlay"></div>
+
+    <button id="mobile-toggle-btn" class="glass-btn">☰</button>
+
+    <button id="back-to-top" title="Retour en haut">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+    <aside id="app-sidebar" class="glass-panel">
+        <div class="sidebar-header">
+            <div class="avatar-container">
+                <img id="profile-avatar" src="" alt="Avatar" class="id-avatar">
+            </div>
+            <div class="identity-info">
+                <span id="profile-name" class="id-name"></span>
+                <div class="status-badge">
+                    <span class="status-light"></span>
+                    <span id="profile-status"></span>
+                </div>
+            </div>
+            <div class="sidebar-social" id="sidebar-social-container">
+                </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul id="nav-list">
+                </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button id="theme-toggle" class="icon-btn glass-btn">☀️</button>
+            <div class="copyright">
+                <span id="footer-copy"></span>
+            </div>
+            <a href="#" id="legal-trigger-desktop" style="font-size: 0.7rem; color: var(--text-secondary); text-decoration: none; margin-top: 5px; opacity: 0.8;">Mentions Légales</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="container">
+            
+            <section id="accueil" class="hero-section">
+                <div class="hero-content fade-in-up">
+                    <div class="hero-tag">ADMINISTRATEUR SYSTÈME & RÉSEAU</div>
+                    <h1 class="hero-title"><span id="typewriter-area"></span><span class="cursor">_</span></h1>
+                    <p id="profile-bio" class="bio-text"></p>
+
+                    <div class="cta-group">
+                        <button id="contact-trigger-hero" class="primary-btn pulse-anim">
+                            <span>Me Contacter</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                    
+                    <div id="skills-section" class="skills-ticker"></div>
+                </div>
+            </section>
+
+            <section id="apropos" class="section-wrapper">
+                <div class="section-header fade-in-up">
+                    <span class="section-number">02</span>
+                    <h3 class="section-title">A Propos 💬</h3>
+                </div>
+                
+                <div class="about-container fade-in-up">
+                    <div class="about-image-wrapper">
+                        <img src="assets/img/ma-photo.jpg" alt="Rémi Christophe" class="about-profile-img">
+                    </div>
+                    
+                    <div class="about-text-content">
+                        <h4 class="about-subtitle">Présentation</h4>
+                        <p class="about-intro">Bonjour, moi c'est <strong>Rémi Christophe</strong> 👋</p>
+                        
+                        <div class="about-body">
+                            <p>Je suis actuellement étudiant à <strong>CaenSup Sainte-Ursule</strong> en deuxième année de <strong>BTS SIO</strong> (Services Informatiques aux Organisations) dans l'<strong>option SISR</strong> (Solutions d'Infrastructure, Systèmes et Réseaux).</p>
+                            
+                            <p>Actuellement toujours en cours d'étude 🎓, je vous propose sur ce portfolio de retrouver ci-dessous mes différentes études, et projets professionnels que j'ai pu entreprendre au sein de ma carrière.</p>
+                            
+                            <p>Vous retrouverez ci-dessous mon CV ainsi que mes différents projets 💻</p>
+                        </div>
+
+                        <div class="about-action">
+                            <a href="documents/cv_remi_christophe.pdf" target="_blank" class="cv-button-styled" download>
+                                CV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="procedures" class="section-wrapper">
+                <div class="section-header fade-in-up">
+                    <span class="section-number">03</span>
+                    <h3 class="section-title">Procédures Techniques</h3>
+                </div>
+                <p class="section-subtitle fade-in-up">Documentation technique détaillée. Cliquez pour visualiser.</p>
+                <div id="procedures-list" class="grid"></div>
+            </section>
+
+            <section id="parcours" class="section-wrapper">
+                <div class="section-header fade-in-up">
+                    <span class="section-number">04</span>
+                    <h3 class="section-title">Parcours Pro 🤵</h3>
+                </div>
+                
+                <div class="fade-in-up" style="display: flex; flex-direction: column; gap: 30px;">
+                    <div class="sisr-card" style="height: auto; align-items: flex-start; text-align: left; flex-direction: row; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4 style="font-size: 1.4rem; color: var(--text-primary); margin-bottom: 5px; font-family: var(--font-heading);">SEQENS (Industrie Chimique)</h4>
+                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; color: var(--accent); font-weight: 600; display: inline-block; margin-bottom: 15px;">Stagiaire Administrateur Réseau | Mai - Juin 2025</span>
+                            <p style="margin-bottom: 10px; font-weight: 600;">Gestion et optimisation de l'infrastructure locale.</p>
+                            <ul style="list-style-type: disc; padding-left: 20px; color: var(--text-secondary); line-height: 1.6;">
+                                <li style="margin-bottom: 8px;"><strong>Configuration Réseau :</strong> Paramétrage de switchs pour assurer la connectivité et la sécurité des données.</li>
+                                <li style="margin-bottom: 8px;">Conception de schémas réseaux détaillés pour cartographier l'infrastructure de l'entreprise.</li>
+                                <li><strong>Support :</strong> Diagnostic et résolution d'incidents sur les postes de travail utilisateurs.</li>
+                            </ul>
+                        </div>
+                        <div style="font-size: 3rem; margin-left: 20px; align-self: center;">🧪</div>
+                    </div>
+
+                    <div class="sisr-card" style="height: auto; align-items: flex-start; text-align: left; flex-direction: row; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4 style="font-size: 1.4rem; color: var(--text-primary); margin-bottom: 5px; font-family: var(--font-heading);">E.LECLERC DRIVE</h4>
+                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; color: var(--accent); font-weight: 600; display: inline-block; margin-bottom: 15px;">Préparateur de commande | Été 2025</span>
+                            <ul style="list-style-type: disc; padding-left: 20px; color: var(--text-secondary); line-height: 1.6;">
+                                <li style="margin-bottom: 8px;"><strong>Organisation :</strong> Respect des délais de préparation impartis et utilisation de terminaux numériques (scan).</li>
+                                <li style="margin-bottom: 8px;"><strong>Travail d'équipe :</strong> Coordination avec les autres préparateurs et les livreurs pour assurer la fluidité du service.</li>
+                                <li><strong>Autonomie :</strong> Responsabilité de sa zone de préparation et respect des consignes de sécurité.</li>
+                            </ul>
+                        </div>
+                        <div style="font-size: 3rem; margin-left: 20px; align-self: center;">🛒</div>
+                    </div>
+
+                    <div class="sisr-card" style="height: auto; align-items: flex-start; text-align: left; flex-direction: row; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4 style="font-size: 1.4rem; color: var(--text-primary); margin-bottom: 5px; font-family: var(--font-heading);">PLATEFORME INDUSTRIELLE COURRIER (La Poste)</h4>
+                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; color: var(--accent); font-weight: 600; display: inline-block; margin-bottom: 15px;">Technicien de Maintenance IT | Du 12 juin au 7 juillet 2023 et du 25 mars au 19 avril 2024</span>
+                            <ul style="list-style-type: disc; padding-left: 20px; color: var(--text-secondary); line-height: 1.6;">
+                                <li style="margin-bottom: 8px;"><strong>Hardware :</strong> Montage, démontage et préparation de PC (Masterisation) pour le déploiement.</li>
+                                <li style="margin-bottom: 8px;"><strong>Câblage :</strong> Intervention sur les baies de brassage pour raccorder les équipements.</li>
+                                <li><strong>Sécurité :</strong> Configuration et maintenance des enregistreurs vidéo (Vidéosurveillance).</li>
+                            </ul>
+                        </div>
+                        <div style="font-size: 3rem; margin-left: 20px; align-self: center;">📮</div>
+                    </div>
+
+                    <div class="sisr-card" style="height: auto; align-items: flex-start; text-align: left; flex-direction: row; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4 style="font-size: 1.4rem; color: var(--text-primary); margin-bottom: 5px; font-family: var(--font-heading);">Centre hospitalier Falaise</h4>
+                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; color: var(--accent); font-weight: 600; display: inline-block; margin-bottom: 15px;">Technicien Support Informatique | Janv. - Fév. 2023</span>
+                            <ul style="list-style-type: disc; padding-left: 20px; color: var(--text-secondary); line-height: 1.6;">
+                                <li style="margin-bottom: 8px;"><strong>Support Utilisateur :</strong> Préparation et configuration de la flotte mobile (téléphones) et des postes de travail pour le personnel soignant et administratif.</li>
+                                <li style="margin-bottom: 8px;"><strong>Réseau :</strong> Diagnostic et dépannage sur les équipements de connectivité (Switchs) pour assurer la continuité de service.</li>
+                                <li><strong>Maintenance :</strong> Intervention rapide sur les pannes matérielles (PC) pour minimiser l'impact sur l'activité de l'hôpital.</li>
+                            </ul>
+                        </div>
+                        <div style="font-size: 3rem; margin-left: 20px; align-self: center;">🏥</div>
+                    </div>
+
+                    <div class="sisr-card" style="height: auto; align-items: flex-start; text-align: left; flex-direction: row; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4 style="font-size: 1.4rem; color: var(--text-primary); margin-bottom: 5px; font-family: var(--font-heading);">Mairie de Falaise</h4>
+                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; color: var(--accent); font-weight: 600; display: inline-block; margin-bottom: 15px;">Technicien Support Informatique | Du 24 janvier au 5 février 2022 et du 27 novembre au 22 décembre 2023</span>
+                            <ul style="list-style-type: disc; padding-left: 20px; color: var(--text-secondary); line-height: 1.6;">
+                                <li style="margin-bottom: 8px;"><strong>Déploiement Système :</strong> Installation, configuration et mise à jour de postes de travail sous environnement Windows 10.</li>
+                                <li style="margin-bottom: 8px;"><strong>Câblage & Réseau :</strong> Opérations de brassage dans les baies de serveurs pour connecter les nouveaux bureaux au réseau de la mairie.</li>
+                                <li><strong>Réparation Hardware :</strong> Diagnostic de pannes et remplacement de composants défectueux (disques durs) pour prolonger la durée de vie du matériel.</li>
+                            </ul>
+                        </div>
+                        <div style="font-size: 3rem; margin-left: 20px; align-self: center;">🏛️</div>
+                    </div>
+
+                    <div class="sisr-card" style="height: auto; align-items: flex-start; text-align: left; flex-direction: row; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4 style="font-size: 1.4rem; color: var(--text-primary); margin-bottom: 5px; font-family: var(--font-heading);">CENTRES DE LOISIRS (Argentan & Goulet)</h4>
+                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; color: var(--accent); font-weight: 600; display: inline-block; margin-bottom: 15px;">Animateur | Été 2023 | Octobre 2024</span>
+                            <ul style="list-style-type: disc; padding-left: 20px; color: var(--text-secondary); line-height: 1.6;">
+                                <li style="margin-bottom: 8px;"><strong>Responsabilité :</strong> Garantie de la sécurité physique et morale des mineurs sur différents sites et tranches d'âge.</li>
+                                <li style="margin-bottom: 8px;"><strong>Travail d'équipe :</strong> Coordination avec les équipes pédagogiques locales pour organiser les plannings d'activités.</li>
+                                <li><strong>Adaptabilité :</strong> Gestion des conflits et capacité à s'intégrer rapidement dans deux environnements de travail différents.</li>
+                            </ul>
+                        </div>
+                        <div style="font-size: 3rem; margin-left: 20px; align-self: center;">🧸</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="parcours-scolaire" class="section-wrapper">
+                <div class="section-header fade-in-up">
+                    <span class="section-number">05</span>
+                    <h3 class="section-title">Parcours Scolaire 🎓</h3>
+                </div>
+                
+                <div class="fade-in-up" style="display: flex; flex-direction: column; gap: 30px;">
+                    <div class="sisr-card" style="height: auto; align-items: flex-start; text-align: left; flex-direction: row; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4 style="font-size: 1.4rem; color: var(--text-primary); margin-bottom: 5px; font-family: var(--font-heading);">BTS SIO - Option SISR</h4>
+                            <div style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 10px;">CaenSup Sainte-Ursule | Depuis Septembre 2024</div>
+                            <span style="background: rgba(99, 102, 241, 0.2); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; color: var(--accent); font-weight: 600; display: inline-block; margin-bottom: 15px;">Spécialisation : Solutions d'Infrastructure, Systèmes et Réseaux</span>
+                            <p style="color: var(--text-secondary); line-height: 1.6;">Acquisition de compétences en administration système (Windows/Linux) et équipements réseaux, cybersécurité et architecture réseau. Protocol et services réseaux.</p>
+                        </div>
+                        <div style="font-size: 3rem; margin-left: 20px; align-self: center;">🏫</div>
+                    </div>
+
+                    <div class="sisr-card" style="height: auto; align-items: flex-start; text-align: left; flex-direction: row; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4 style="font-size: 1.4rem; color: var(--text-primary); margin-bottom: 5px; font-family: var(--font-heading);">Baccalauréat Professionnel SN - Option RISC</h4>
+                            <div style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 10px;">Lycée Charles Tellier | Obtenu en 2024</div>
+                            <span style="background: rgba(251, 191, 36, 0.2); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; color: var(--gold); font-weight: 600; display: inline-block; margin-bottom: 15px;">Mention : Assez Bien</span>
+                            <div style="margin-bottom:10px; font-weight:600; font-size:0.9rem; color:var(--text-primary);">Spécialité : Réseaux Informatiques et Systèmes Communicants</div>
+                            <p style="color: var(--text-secondary); line-height: 1.6;">Acquisition de compétences en administration système (Windows/Linux) et équipements réseaux câblage et maintenance des équipements informatiques.</p>
+                        </div>
+                        <div style="font-size: 3rem; margin-left: 20px; align-self: center;">🎓</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="competences" class="section-wrapper">
+                <div class="section-header fade-in-up">
+                    <span class="section-number">06</span>
+                    <h3 class="section-title">Compétences SISR 🛠️</h3>
+                </div>
+                
+                <p class="section-subtitle fade-in-up" style="margin-top: 0px; line-height: 1.6; max-width: 900px;">
+                    Toutes ces connaissances ont été acquises de différentes façons. Elles ont été acquises durant mes études en BTS SIO et d'autres par ma propre initiative en essayant de mettre en place des solutions. J’ai également relevé les défis organisés, ce qui permet d’effectuer des recherches et aller encore plus loin.
+                </p>
+
+                <div class="sisr-grid fade-in-up">
+                    <div class="sisr-card">
+                        <div class="sisr-icon">📡</div>
+                        <div class="sisr-label">CISCO IOS</div>
+                    </div>
+                    
+                    <div class="sisr-card">
+                        <div class="sisr-icon">🖥️</div>
+                        <div class="sisr-label">WIN SERVER</div>
+                    </div>
+
+                    <div class="sisr-card">
+                        <div class="sisr-icon">🐧</div>
+                        <div class="sisr-label">LINUX / DEBIAN</div>
+                    </div>
+
+                    <div class="sisr-card">
+                        <div class="sisr-icon">👥</div>
+                        <div class="sisr-label">ACTIVE DIR.</div>
+                    </div>
+
+                    <div class="sisr-card">
+                        <div class="sisr-icon">☁️</div>
+                        <div class="sisr-label">VMWARE / ESXI</div>
+                    </div>
+
+                    <div class="sisr-card">
+                        <div class="sisr-icon">⌨️</div>
+                        <div class="sisr-label">POWERSHELL</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="outils" class="section-wrapper">
+                <div class="section-header fade-in-up">
+                    <span class="section-number">07</span>
+                    <h3 class="section-title">Mes Outils / Logiciels ⚙️</h3>
+                </div>
+                
+                <p class="section-subtitle fade-in-up" style="margin-top: 0px; line-height: 1.6; max-width: 900px;">
+                    Toutes ces connaissances ont été acquises de différentes façons. Elles ont été acquises durant mes études en BTS SIO et d'autres par ma propre initiative en essayant de mettre en place des solutions. J’ai également relevé les défis organisés, ce qui permet d’effectuer des recherches et aller encore plus loin.
+                </p>
+
+                <div class="sisr-grid fade-in-up">
+                    <div class="sisr-card">
+                        <div class="sisr-icon">🎓</div>
+                        <div class="sisr-label">PACKET TRACER</div>
+                    </div>
+                    
+                    <div class="sisr-card">
+                        <div class="sisr-icon">🦈</div>
+                        <div class="sisr-label">WIRESHARK</div>
+                    </div>
+
+                    <div class="sisr-card">
+                        <div class="sisr-icon">📟</div>
+                        <div class="sisr-label">PUTTY / SSH</div>
+                    </div>
+
+                    <div class="sisr-card">
+                        <div class="sisr-icon">📦</div>
+                        <div class="sisr-label">VIRTUALBOX</div>
+                    </div>
+
+                    <div class="sisr-card">
+                        <div class="sisr-icon">🎫</div>
+                        <div class="sisr-label">GLPI / TICKETS</div>
+                    </div>
+
+                    <div class="sisr-card">
+                        <div class="sisr-icon">📐</div>
+                        <div class="sisr-label">VISIO / DRAW.IO</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="certifications" class="section-wrapper">
+                <div class="section-header fade-in-up">
+                    <span class="section-number">08</span>
+                    <h3 class="section-title">Certifications 📜</h3>
+                </div>
+                
+                <p class="section-subtitle fade-in-up" style="margin-top: 0px; line-height: 1.6; max-width: 900px;">
+                    Toutes ces connaissances ont été acquises de différentes façons. Elles ont été acquises durant mes études en BTS SIO et d'autres par ma propre initiative en essayant de mettre en place des solutions. J’ai également relevé les défis organisés, ce qui permet d’effectuer des recherches et aller encore plus loin.
+                </p>
+
+                <div class="sisr-grid fade-in-up">
+                    <div class="sisr-card cert-card">
+                        <div class="cert-info-wrapper">
+                            <span class="cert-info-icon">i</span>
+                            <div class="cert-tooltip">MOOC de l'ANSSI : Hygiène informatique et cybersécurité.</div>
+                        </div>
+                        <a href="documents/secnumacademie.pdf" target="_blank" class="cert-link-overlay">
+                            <div class="sisr-icon">🛡️</div>
+                            <div class="sisr-label">SECNUMACADÉMIE</div>
+                            <div class="pdf-badge">Voir le PDF 📄</div>
+                        </a>
+                    </div>
+                    
+                    <div class="sisr-card cert-card">
+                        <div class="cert-info-wrapper">
+                            <span class="cert-info-icon">i</span>
+                            <div class="cert-tooltip">Introduction aux enjeux de la cybersécurité.</div>
+                        </div>
+                        <a href="documents/attestation_spark.pdf" target="_blank" class="cert-link-overlay">
+                            <div class="sisr-icon">⚠️</div>
+                            <div class="sisr-label">SPARK CYBER</div>
+                            <div class="pdf-badge">Voir le PDF 📄</div>
+                        </a>
+                    </div>
+
+                    <div class="sisr-card cert-card">
+                        <div class="cert-info-wrapper">
+                            <span class="cert-info-icon">i</span>
+                            <div class="cert-tooltip">Bonnes pratiques de sécurité en entreprise.</div>
+                        </div>
+                        <a href="documents/attestation_cyber.pdf" target="_blank" class="cert-link-overlay">
+                            <div class="sisr-icon">🔒</div>
+                            <div class="sisr-label">SENSIBILISATION CYBER</div>
+                            <div class="pdf-badge">Voir le PDF 📄</div>
+                        </a>
+                    </div>
+
+                    <div class="sisr-card cert-card">
+                        <div class="cert-info-wrapper">
+                            <span class="cert-info-icon">i</span>
+                            <div class="cert-tooltip">Bases de la sécurité des réseaux et protection.</div>
+                        </div>
+                        <a href="documents/cisco_intro_cyber.pdf" target="_blank" class="cert-link-overlay">
+                            <div class="sisr-icon">📡</div>
+                            <div class="sisr-label">CISCO INTRO CYBER</div>
+                            <div class="pdf-badge">Voir le PDF 📄</div>
+                        </a>
+                    </div>
+
+                    <div class="sisr-card cert-card">
+                        <div class="cert-info-wrapper">
+                            <span class="cert-info-icon">i</span>
+                            <div class="cert-tooltip">Fondamentaux des réseaux et protocoles (OSI, TCP/IP).</div>
+                        </div>
+                        <a href="documents/cisco_basics.pdf" target="_blank" class="cert-link-overlay">
+                            <div class="sisr-icon">🌐</div>
+                            <div class="sisr-label">CISCO BASICS</div>
+                            <div class="pdf-badge">Voir le PDF 📄</div>
+                        </a>
+                    </div>
+
+                    <div class="sisr-card cert-card">
+                        <div class="cert-info-wrapper">
+                            <span class="cert-info-icon">i</span>
+                            <div class="cert-tooltip">Configuration des équipements (Switchs, Routeurs).</div>
+                        </div>
+                        <a href="documents/cisco_config.pdf" target="_blank" class="cert-link-overlay">
+                            <div class="sisr-icon">⚙️</div>
+                            <div class="sisr-label">CISCO CONFIG</div>
+                            <div class="pdf-badge">Voir le PDF 📄</div>
+                        </a>
+                    </div>
+
+                    <div class="sisr-card cert-card">
+                        <div class="cert-info-wrapper">
+                            <span class="cert-info-icon">i</span>
+                            <div class="cert-tooltip">Adressage IPv4/IPv6 et dépannage réseau.</div>
+                        </div>
+                        <a href="documents/cisco_addressing.pdf" target="_blank" class="cert-link-overlay">
+                            <div class="sisr-icon">🔍</div>
+                            <div class="sisr-label">CISCO IP & TROUBLESHOOT</div>
+                            <div class="pdf-badge">Voir le PDF 📄</div>
+                        </a>
+                    </div>
+
+                    <div class="sisr-card cert-card">
+                        <div class="cert-info-wrapper">
+                            <span class="cert-info-icon">i</span>
+                            <div class="cert-tooltip">Certification des compétences numériques transversales.</div>
+                        </div>
+                        <a href="documents/certification_pix.pdf" target="_blank" class="cert-link-overlay">
+                            <div class="sisr-icon">🖥️</div>
+                            <div class="sisr-label">CERTIFICATION PIX</div>
+                            <div class="pdf-badge">Voir le PDF 📄</div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="veille" class="section-wrapper">
+                <div class="section-header fade-in-up">
+                    <span class="section-number">09</span>
+                    <h3 class="section-title">Veille Technologique 📔</h3>
+                </div>
+                
+                <div class="fade-in-up" style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 30px;">
+                    <h4 style="color: var(--text-primary); font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 15px;">Qu'est-ce que la veille technologique ?</h4>
+                    <p style="margin-bottom: 30px;">
+                        La veille technologique, élément de la veille stratégique, consiste à surveiller les évolutions techniques, les innovations dans un secteur d'activité donnée. La veille technologique comprend notamment la surveillance, la collecte, le partage et la diffusion d'information permettant d'anticiper ou de s'informer sur des changements en matière de recherche, développement, brevet, lancement de nouveaux produits, matériaux, processus, concepts, innovation de fabrication, etc.... Cela a pour but d'évaluer l'impact sur l'environnement et l'organisation.
+                    </p>
+
+                    <h4 style="color: var(--text-primary); font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 15px;">Les principaux outils de ma veille</h4>
+                    <p>
+                        J'ai effectuer ma veille technologique grace aux newsletters tel que <strong>Feedly</strong> un agrégateur de flux RSS et <strong>Openai.com</strong> le newletter des professionnels en Data Science. En plus des informations fournis chaque semaine/mois, j'ai quelque sites en favoris permettant de me tenir au courant des dernières actualités tel que <strong>Hitek.fr</strong> qui est un site internet regroupant l'actualité High Tech et Geek, ou encore <strong>Hardware.fr</strong> un site regroupant l'actualité sur les processeurs, les cartes graphiques, les cartes méres, ect...
+                    </p>
+                </div>
+            </section>
+
+             <section id="contact-bottom" class="section-wrapper">
+                <div class="contact-new-header">
+                    <h3 class="contact-new-title">Contact ✉️</h3>
+                    <div class="contact-new-subtitle">ENVOYER MOI UN <span class="highlight-text">MESSAGE</span></div>
+                </div>
+
+                <div class="contact-new-wrapper fade-in-up">
+                    <div class="contact-new-info">
+                        <div class="info-item-new">
+                            <div class="icon-circle">📍</div>
+                            <div class="info-text">
+                                <h4>Localisation :</h4>
+                                <p>Normandie, France</p>
+                            </div>
+                        </div>
+                        <div class="info-item-new">
+                            <div class="icon-circle">✉️</div>
+                            <div class="info-text">
+                                <h4>Email :</h4>
+                                <p id="footer-email-display">remichristophe3@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="info-item-new">
+                            <div class="icon-circle">📞</div>
+                            <div class="info-text">
+                                <h4>Téléphone :</h4>
+                                <p>06 06 43 51 41</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-new-form-container">
+                        <form id="footer-form" class="new-design-form">
+                            <div class="form-row">
+                                <div class="form-group-new">
+                                    <label>Votre nom</label>
+                                    <input type="text" required>
+                                </div>
+                                <div class="form-group-new">
+                                    <label>Votre mail*</label>
+                                    <input type="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group-new">
+                                <label>Sujet*</label>
+                                <input type="text" required>
+                            </div>
+                            <div class="form-group-new">
+                                <label>Votre message*</label>
+                                <textarea rows="5" required></textarea>
+                            </div>
+                            <div class="form-submit-wrapper">
+                                <button type="submit" class="new-submit-btn">✈️ Envoyer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="glass-panel fade-in-up mobile-footer">
+                <div class="footer-content">
+                    <div class="sys-info">
+                        <span id="last-update" class="sys-status">System Online</span>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#" id="legal-trigger">Mentions Légales</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <div id="contact-modal" class="modal-overlay">
+        <div class="modal-content glass-panel contact-modal-size new-modal-style">
+            <div class="contact-new-wrapper full-height">
+                    <div class="contact-new-info modal-fix-info">
+                        <h3 class="modal-mini-title">Contactez-moi</h3>
+                        <div class="info-item-new">
+                            <div class="icon-circle">📍</div>
+                            <div class="info-text">
+                                <h4>Localisation</h4>
+                                <p>Normandie, France</p>
+                            </div>
+                        </div>
+                        <div class="info-item-new">
+                            <div class="icon-circle">✉️</div>
+                            <div class="info-text">
+                                <h4>Email</h4>
+                                <p id="display-email-text">...</p>
+                            </div>
+                        </div>
+                        <div class="info-item-new">
+                            <div class="icon-circle">📞</div>
+                            <div class="info-text">
+                                <h4>Téléphone</h4>
+                                <p>06 06 43 51 41</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-new-form-container modal-fix-form">
+                        <button id="contact-close-btn" class="close-btn-abs">×</button>
+                        <form id="beautiful-form" class="new-design-form">
+                            <div class="form-row">
+                                <div class="form-group-new">
+                                    <label>Nom</label>
+                                    <input type="text" id="form-name" required>
+                                </div>
+                                <div class="form-group-new">
+                                    <label>Email*</label>
+                                    <input type="email" id="form-email" required>
+                                </div>
+                            </div>
+                            <div class="form-group-new">
+                                <label>Message*</label>
+                                <textarea id="form-message" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="new-submit-btn full-width">Envoyer le message</button>
+                            <p id="form-feedback" style="display:none; margin-top:10px; color:#10b981;">Message transmis.</p>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content glass-panel large-modal">
+            <div class="modal-header"><span id="modal-project-title">PROJECT_DATA</span><button id="project-close-btn" class="close-btn">×</button></div>
+            <div class="modal-body">
+                <p id="modal-project-desc"></p>
+                <div id="modal-project-tags" class="tags-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="legal-modal" class="modal-overlay">
+        <div class="modal-content glass-panel">
+            <div class="modal-header"><span>Mentions Légales</span><button id="legal-close-btn" class="close-btn">×</button></div>
+            <div class="modal-body legal-text" style="overflow-y: auto; max-height: 70vh;">
+                <h4 style="color:var(--accent); margin-bottom:10px;">1. Éditeur</h4>
+                <p style="margin-bottom:15px;"><strong>Rémi Christophe</strong><br>Étudiant BTS SIO - Option SISR<br>Contact : <span class="mono-text">remichristophe3@gmail.com</span></p>
+
+                <h4 style="color:var(--accent); margin-bottom:10px;">2. Hébergement</h4>
+                <p style="margin-bottom:15px;">Ce site est hébergé par <strong>GitHub Pages</strong> (GitHub Inc.).<br>Adresse : 88 Colin P. Kelly Jr Street, San Francisco, CA 94107, United States.</p>
+
+                <h4 style="color:var(--accent); margin-bottom:10px;">3. Formulaire de Contact</h4>
+                <p style="margin-bottom:15px;">Le formulaire de contact utilise le service <strong>Formspree</strong>. Les informations soumises sont transmises directement par email et ne sont pas stockées sur le serveur du site.</p>
+
+                <h4 style="color:var(--accent); margin-bottom:10px;">4. Données Personnelles</h4>
+                <p>Ce site est statique et n'utilise pas de cookies de traçage publicitaire. Les seules données collectées sont celles que vous fournissez volontairement via le formulaire de contact.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
