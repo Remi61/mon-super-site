@@ -158,13 +158,6 @@ const config = {
             path: "dns_dynamique.pdf", 
             tags: ["Linux", "DNS", "DDNS"] 
         },
-        { 
-            icon: "🏷️",
-            title: "Apache et DNS", 
-            description: "Mise en place d'un srveur Apache et DNS.", 
-            path: "apachedns.pdf", 
-            tags: ["LAMP", "Apache", "DNS"] 
-        }
 
         // --- BATCH 3 ---
         { 
@@ -230,6 +223,7 @@ const config = {
     ]
 
 };
+
 
 
 
