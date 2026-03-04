@@ -131,13 +131,6 @@ const config = {
             tags: ["Linux", "DNS", "Installation"] 
         },
         { 
-            icon: "📶",
-            title: "Install. Douchette Bluetooth", 
-            description: "Installation et configuration d'une douchette sur Client Léger (Mode Administrateur).", 
-            path: "install_douchette.pdf", 
-            tags: ["Matériel", "Client Léger", "Bluetooth"] 
-        },
-        { 
             icon: "💾",
             title: "Gestion du RAID Logiciel", 
             description: "Installation du système d'exploitation en RAID 1 et configuration du RAID 5 sous Linux.", 
@@ -230,6 +223,7 @@ const config = {
     ]
 
 };
+
 
 
 
