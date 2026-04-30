@@ -181,13 +181,7 @@ const config = {
             path: "config_dhcp.pdf", 
             tags: ["Linux", "DHCP", "Réseau"] 
         }
-		{ 
-            icon: "🤖",
-            title: "TP Attaque DHCP Snooping", 
-            description: "Mise en place et contremesure d'une attaque DHCP Snooping.", 
-            path: "dhcpsnooping.pdf", 
-            tags: ["Cisco", "DHCP", "Cyber"] 
-        }
+		
     ],
 
     experiences: [
