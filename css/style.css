@@ -804,3 +804,150 @@ body.light-mode .hero-title { background: linear-gradient(135deg, #0f172a 30%, #
     opacity: 0.5;
     transition: 0.3s;
 }
+
+/* --- SECTION E5 DEDIEE --- */
+.e5-glass-container {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-light);
+    border-radius: 24px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.e5-glass-container:hover {
+    border-color: var(--border-hover);
+}
+
+/* Petit effet de halo violet derrière */
+.e5-glass-container::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: var(--accent-glow);
+    filter: blur(70px);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.e5-content {
+    flex: 1.2;
+}
+
+.e5-badge-top {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.e5-main-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.e5-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 25px;
+    font-size: 1.05rem;
+}
+
+.e5-features {
+    display: flex;
+    gap: 20px;
+}
+
+.feat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.feat i {
+    color: var(--green-signal);
+}
+
+/* Visuel à droite */
+.e5-visual {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.pdf-card-preview {
+    width: 180px;
+    height: 220px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-light);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+}
+
+.pdf-main-icon {
+    font-size: 4rem;
+    color: #ef4444; /* Rouge PDF classique mais peut être mis en var(--accent) */
+    margin-bottom: 15px;
+    filter: drop-shadow(0 5px 15px rgba(239, 68, 68, 0.3));
+}
+
+.pdf-info-mini {
+    text-align: center;
+}
+
+.pdf-name {
+    display: block;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+}
+
+.pdf-size {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.e5-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Adaptabilité Mobile */
+@media (max-width: 850px) {
+    .e5-glass-container {
+        flex-direction: column;
+        padding: 30px;
+        text-align: center;
+    }
+    
+    .e5-features {
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    
+    .pdf-card-preview {
+        display: none; /* On cache l'aperçu sur mobile pour gagner de la place */
+    }
+}
