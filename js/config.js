@@ -13,7 +13,7 @@ const config = {
         githubUser: "remi-christophe", 
         githubRepo: "Portfolio", 
         avatar: "assets/img/ma-photo.jpg",
-        name: "Rémi Christophe",
+        name: "REMI.",
         typewriterText: "Admin Sys & Réseau | Étudiant BTS SIO",
         bio: "Étudiant en 2ème année de BTS SIO à CaenSup Sainte-Ursule. Spécialisé dans l'infrastructure réseau Cisco, le déploiement de serveurs et la maintenance système.",
         status: "Disponible pour alternance",
