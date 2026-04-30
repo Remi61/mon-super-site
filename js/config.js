@@ -21,7 +21,7 @@ const config = {
     },
 
     social: { 
-        github: "#", 
+        github: "https://github.com/Remi61", 
         linkedin: "https://www.linkedin.com/in/remi-christophe-91576a224/" 
     },
     skills: [ "Cisco IOS", "Linux Debian", "Windows Server", "Active Directory", "VMware" ],
