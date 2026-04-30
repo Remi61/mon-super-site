@@ -181,6 +181,42 @@ const config = {
             path: "config_dhcp.pdf", 
             tags: ["Linux", "DHCP", "Réseau"] 
         }
+		// --- BATCH 4 (Nouveautés) ---
+        { 
+            icon: "💾",
+            title: "RAID Logiciel (Debian 13)", 
+            description: "Mise en place de RAID 1 pour le système et RAID 5 pour les données sous Debian 13 avec mdadm.", 
+            path: "raid.pdf", 
+            tags: ["Linux", "Stockage", "RAID"] 
+        },
+        { 
+            icon: "🚀",
+            title: "Routage Dynamique RIPng", 
+            description: "Configuration du routage dynamique IPv6 (RIPng) sur des routeurs Cisco et analyse des tables.", 
+            path: "routagedynamique.pdf", 
+            tags: ["Cisco", "IPv6", "Réseau"] 
+        },
+        { 
+            icon: "🕵️",
+            title: "Attaque MITM SSH", 
+            description: "Analyse d'une interception de mots de passe via une attaque Man-In-The-Middle et déploiement de contre-mesures.", 
+            path: "attaquemitm.pdf", 
+            tags: ["Sécurité", "SSH", "Kali"] 
+        },
+        { 
+            icon: "🛡️",
+            title: "DHCP Snooping", 
+            description: "Protection contre les serveurs DHCP malveillants via la configuration du DHCP Snooping sur switchs Cisco.", 
+            path: "dhcpsnooping.pdf", 
+            tags: ["Cisco", "Sécurité", "Réseau"] 
+        },
+        { 
+            icon: "🤖",
+            title: "Sauvegarde Auto Python", 
+            description: "Automatisation de la sauvegarde des configurations switchs Cisco via un script Python et la bibliothèque Netmiko.", 
+            path: "sauvegardeauto.pdf", 
+            tags: ["Python", "Cisco", "Automatisation"] 
+        }
 		
     ],
 
