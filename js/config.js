@@ -180,7 +180,7 @@ const config = {
             description: "Comment mettre en place un serveur DHCP sur une machine Debian 12.", 
             path: "config_dhcp.pdf", 
             tags: ["Linux", "DHCP", "Réseau"] 
-        }
+        },
 		// --- BATCH 4 (Nouveautés) ---
         { 
             icon: "💾",
